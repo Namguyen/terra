@@ -5,8 +5,6 @@ import { toJsonLd } from "@/lib/json-ld";
 import { href } from "@/lib/routes";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { PlaceholderNote } from "@/components/ui/PlaceholderNote";
-import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PageHero } from "@/components/sections/PageHero";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
@@ -69,38 +67,6 @@ export default function AiPage() {
         </Container>
       </section>
 
-      <section className="py-16 sm:py-24">
-        <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <SectionHeading eyebrow={t.cases.eyebrow} title={t.cases.title} />
-            <PlaceholderNote>{t.cases.note}</PlaceholderNote>
-          </div>
-          <ul className="mt-10 grid gap-5 lg:grid-cols-3">
-            {t.cases.items.map((c, i) => (
-              <Reveal as="li" key={c.title} delay={i * 90}>
-                <article className="flex h-full flex-col rounded-2xl border border-moss-900/10 bg-white/70 p-7">
-                  <p className="text-xs font-semibold tracking-[0.16em] text-ai uppercase">{c.sector}</p>
-                  <h3 className="mt-3 text-xl">{c.title}</h3>
-                  <dl className="mt-5 flex-1 space-y-4 text-sm leading-relaxed">
-                    <div>
-                      <dt className="font-semibold text-moss-950">{t.cases.labels.challenge}</dt>
-                      <dd className="mt-1 text-muted">{c.challenge}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold text-moss-950">{t.cases.labels.solution}</dt>
-                      <dd className="mt-1 text-muted">{c.solution}</dd>
-                    </div>
-                    <div className="rounded-xl bg-ai-soft p-4">
-                      <dt className="font-semibold text-ai">{t.cases.labels.result}</dt>
-                      <dd className="mt-1 text-moss-900">{c.result}</dd>
-                    </div>
-                  </dl>
-                </article>
-              </Reveal>
-            ))}
-          </ul>
-        </Container>
-      </section>
 
       <section className="bg-cream-100 py-16 sm:py-24">
         <Container className="grid gap-10 lg:grid-cols-12">

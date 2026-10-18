@@ -1,6 +1,5 @@
 /**
  * All website copy.
- * Anything marked [placeholder] must be replaced with verified, real information before launch.
  */
 export const copy = {
   meta: {
@@ -27,7 +26,6 @@ export const copy = {
     requestQuote: "Request a quote",
     bookAiConsult: "Book an AI consultation",
     contactUs: "Contact us",
-    placeholderNote: "Placeholder — to be replaced with real data",
     backHome: "Back to home",
   },
 
@@ -40,19 +38,13 @@ export const copy = {
       primaryCta: "Request a quote",
       secondaryCta: "Book an AI consultation",
       shortcutsLabel: "Explore our business lines",
-      imageAlt: "Placeholder illustration of a construction site at sunrise",
+      imageAlt: "Illustration of a construction site at sunrise",
     },
     intro: {
       eyebrow: "Who we are",
       title: "One partner, two ways to build stronger.",
       body: "The name says it: “Terra” means earth, “found” means foundation. We help businesses build on solid ground — through dependable sourcing and trading, and through practical digital transformation — always with the same promise of reliability, transparency and long-term partnership.",
       cta: "Our story",
-      stats: [
-        { value: "[XX]+", label: "Years of experience" },
-        { value: "[XXX]+", label: "Orders delivered" },
-        { value: "[XX]+", label: "Partners & suppliers" },
-        { value: "[X]", label: "Countries served" },
-      ],
     },
     lines: {
       eyebrow: "What we do",
@@ -81,39 +73,9 @@ export const copy = {
         },
       ],
     },
-    partners: {
-      eyebrow: "Partners & clients",
-      title: "Trusted by teams across the value chain",
-      note: "Partner logos are placeholders — replace with approved client and supplier logos.",
-    },
-    testimonials: {
-      eyebrow: "Client feedback",
-      title: "What our partners say",
-      note: "Sample testimonials — replace with real, approved client quotes.",
-      items: [
-        {
-          quote:
-            "Goods arrived as scheduled and the documentation was complete, which made customs clearance straightforward.",
-          name: "[Client name]",
-          role: "Procurement Manager, [Contractor company]",
-        },
-        {
-          quote:
-            "They found an alternative supplier within days when our usual source fell through. Communication was clear throughout.",
-          name: "[Client name]",
-          role: "Purchasing Lead, [Distribution company]",
-        },
-        {
-          quote:
-            "The AI team started with our actual processes rather than the technology. The internal assistant is now used every day.",
-          name: "[Client name]",
-          role: "Operations Director, [SME client]",
-        },
-      ],
-    },
     finalCta: {
       title: "Ready to lay the groundwork for your next project?",
-      body: "Tell us what you need — sourcing or AI — and the right team will get back to you within [X] business day(s).",
+      body: "Tell us what you need — sourcing or AI — and the right team will get back to you shortly.",
       primary: "Request a quote",
       secondary: "Book an AI consultation",
     },
@@ -124,7 +86,7 @@ export const copy = {
       name: "General Trading",
       short: "Import, export and on-demand sourcing across industries, managed end to end.",
       long: "We find, verify and deliver the products you need — from supplier search and negotiation to inspection, logistics and customs.",
-      imageAlt: "Placeholder illustration of cargo containers",
+      imageAlt: "Illustration of cargo containers",
     },
     ai: {
       name: "AI Consultancy",
@@ -145,7 +107,7 @@ export const copy = {
       title: "Sourcing made simple, from request to delivery",
       subtitle:
         "Tell us what you need. We search, verify, negotiate and deliver — so you deal with one accountable partner instead of many.",
-      imageAlt: "Placeholder illustration of shipping containers at a port",
+      imageAlt: "Illustration of shipping containers at a port",
     },
     process: {
       eyebrow: "How it works",
@@ -173,14 +135,14 @@ export const copy = {
     logistics: {
       eyebrow: "Logistics capability",
       title: "Moving goods reliably across borders",
-      body: "We work with freight forwarders, customs brokers and warehouse partners to keep shipments visible and on time. [Placeholder — describe actual logistics network and partners.]",
+      body: "We work with freight forwarders, customs brokers and warehouse partners to keep shipments visible and on time.",
       items: [
         { title: "Sea & air freight", body: "FCL, LCL and air cargo options to match budget and urgency." },
         { title: "Customs & documentation", body: "Import/export documentation, HS classification and clearance support." },
         { title: "Warehousing", body: "Short-term storage and consolidation through partner warehouses." },
         { title: "Shipment tracking", body: "Regular status updates from departure to final delivery." },
       ],
-      imageAlt: "Placeholder illustration of a logistics warehouse",
+      imageAlt: "Illustration of a logistics warehouse",
     },
     form: {
       eyebrow: "Sourcing request",
@@ -236,35 +198,6 @@ export const copy = {
         { title: "Support & improvement", body: "Monitoring, iteration and ongoing optimisation as your needs evolve." },
       ],
     },
-    cases: {
-      eyebrow: "Case studies",
-      title: "Sample engagements",
-      note: "Illustrative examples — replace with real, approved case studies and verified results.",
-      items: [
-        {
-          sector: "Distribution",
-          title: "Quotation assistant for a wholesale distributor",
-          challenge: "Sales staff spent hours preparing quotes from price lists and stock sheets.",
-          solution: "An internal assistant that drafts quotes from customer requests using live price and stock data.",
-          result: "[Placeholder result — e.g. quote preparation time reduced by X%]",
-        },
-        {
-          sector: "Trading & logistics",
-          title: "Automated shipping document processing",
-          challenge: "Invoices and packing lists were re-typed manually into the ERP.",
-          solution: "Document extraction workflow with human review for low-confidence fields.",
-          result: "[Placeholder result — e.g. X hours saved per week]",
-        },
-        {
-          sector: "Retail SME",
-          title: "Customer service chatbot",
-          challenge: "Repeated questions overwhelmed a small support team.",
-          solution: "A multilingual chatbot grounded in product FAQs, with hand-off to human agents.",
-          result: "[Placeholder result — e.g. X% of enquiries resolved automatically]",
-        },
-      ],
-      labels: { challenge: "Challenge", solution: "Solution", result: "Result" },
-    },
     faq: {
       eyebrow: "FAQ",
       title: "Frequently asked questions",
@@ -283,7 +216,7 @@ export const copy = {
         },
         {
           q: "How long does a typical project take?",
-          a: "An assessment usually takes [X] weeks, and a pilot [X–X] weeks depending on scope. We agree timelines and success criteria before starting.",
+          a: "Timelines depend on scope. We agree timelines and success criteria before starting.",
         },
         {
           q: "Can you integrate with our existing software?",
@@ -293,7 +226,7 @@ export const copy = {
     },
     cta: {
       title: "Let’s find where AI can help your business",
-      body: "Book a free [placeholder: 30–45 minute] discovery session with our AI team.",
+      body: "Book a free discovery session with our AI team.",
     },
   },
 
@@ -306,13 +239,13 @@ export const copy = {
       eyebrow: "About Terrafound",
       title: "Built on solid ground",
       subtitle: "A company founded on a simple idea: everything worthwhile is built on a reliable foundation.",
-      imageAlt: "Placeholder illustration of a building foundation under construction",
+      imageAlt: "Illustration of a building foundation under construction",
     },
     story: {
       eyebrow: "Our story",
       title: "From the ground up",
       paragraphs: [
-        "Terrafound began in trading, working with businesses that needed a sourcing partner they could count on. [Placeholder — add founding year, location and founders.]",
+        "Terrafound began in trading, working with businesses that needed a sourcing partner they could count on.",
         "As our clients grew, so did their requests: sourcing products across more industries, managing imports and exports, and finding reliable partners abroad.",
         "Running these operations showed us how much time businesses lose to manual work. We built AI tools for ourselves first, then began helping other companies do the same — and AI consultancy became our second pillar.",
       ],
@@ -323,7 +256,7 @@ export const copy = {
     },
     vision: {
       title: "Our vision",
-      body: "[Placeholder] To become a trusted regional partner where reliable supply and digital capability come together.",
+      body: "To become a trusted regional partner where reliable supply and digital capability come together.",
     },
     values: {
       eyebrow: "Core values",
@@ -335,18 +268,6 @@ export const copy = {
         { title: "Progress", body: "We keep improving — through better processes, people and technology." },
       ],
     },
-    team: {
-      eyebrow: "Our team",
-      title: "The people behind Terrafound",
-      note: "Team members are placeholders — replace with real names, roles and photos.",
-      members: [
-        { name: "[Full name]", role: "Founder & CEO" },
-        { name: "[Full name]", role: "Head of Trading & Logistics" },
-        { name: "[Full name]", role: "Head of AI Consultancy" },
-        { name: "[Full name]", role: "Head of Operations" },
-      ],
-      photoAlt: "Placeholder portrait of {name}",
-    },
   },
 
   contact: {
@@ -357,14 +278,12 @@ export const copy = {
     hero: {
       eyebrow: "Contact",
       title: "Let’s talk about your project",
-      subtitle: "Send us a message and the right team will reply within [X] business day(s).",
+      subtitle: "Send us a message and the right team will reply shortly.",
     },
     info: {
       title: "Contact details",
       address: "Address",
       email: "Email",
-      phone: "Phone",
-      hours: "Working hours",
       mapTitle: "Map showing the Terrafound office location",
     },
     formTitle: "Send us a message",
@@ -414,7 +333,7 @@ export const copy = {
       tooShort: "Please enter at least {min} characters.",
       tooLong: "Please keep this under {max} characters.",
     },
-    privacy: "By submitting, you agree that Terrafound may contact you about your request. [Placeholder — link privacy policy.]",
+    privacy: "By submitting, you agree that Terrafound may contact you about your request.",
     prefillProduct: "I would like a quote for: {product}",
   },
 

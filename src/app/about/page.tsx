@@ -1,11 +1,9 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { copy } from "@content/copy";
 import { buildMetadata } from "@/lib/seo";
 import { href } from "@/lib/routes";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { PlaceholderNote } from "@/components/ui/PlaceholderNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PageHero } from "@/components/sections/PageHero";
@@ -68,31 +66,6 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="py-16 sm:py-24">
-        <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <SectionHeading eyebrow={t.team.eyebrow} title={t.team.title} />
-            <PlaceholderNote>{t.team.note}</PlaceholderNote>
-          </div>
-          <ul className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
-            {t.team.members.map((m, i) => (
-              <Reveal as="li" key={m.role} delay={i * 80}>
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-200">
-                  <Image
-                    src="/images/placeholders/portrait.svg"
-                    alt={t.team.photoAlt.replace("{name}", m.name)}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="mt-4 text-base font-semibold">{m.name}</h3>
-                <p className="text-sm text-muted">{m.role}</p>
-              </Reveal>
-            ))}
-          </ul>
-        </Container>
-      </section>
 
       <CtaBanner
         title={copy.home.finalCta.title}

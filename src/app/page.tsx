@@ -10,8 +10,6 @@ import { FeatureGrid } from "@/components/sections/FeatureGrid";
 import { HomeHero } from "@/components/sections/home/HomeHero";
 import { IntroStats } from "@/components/sections/home/IntroStats";
 import { BusinessLineBlocks } from "@/components/sections/home/BusinessLineBlocks";
-import { Partners } from "@/components/sections/home/Partners";
-import { Testimonials } from "@/components/sections/home/Testimonials";
 
 export const metadata: Metadata = {
   ...buildMetadata({ route: "home", description: copy.meta.siteDescription }),
@@ -36,8 +34,6 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <Partners />
-      <Testimonials />
 
       <CtaBanner
         title={t.finalCta.title}
