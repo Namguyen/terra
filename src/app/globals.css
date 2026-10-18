@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/*
+ * Terrafound design tokens — inspired by "terra" (earth):
+ * deep moss green, earth brown, cream background and a terracotta accent.
+ * Each business line has a soft secondary hue: ochre (trading), sage (AI).
+ */
+@theme {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream-50: #fcfaf5;
+  --color-cream-100: #f6f1e7;
+  --color-cream-200: #ece3d1;
+  --color-cream-300: #ddd0b8;
+
+  --color-moss-50: #eef1ea;
+  --color-moss-100: #dfe5d8;
+  --color-moss-300: #a9b79e;
+  --color-moss-500: #5d7556;
+  --color-moss-700: #3a4d36;
+  --color-moss-800: #2c3b29;
+  --color-moss-900: #222e20;
+  --color-moss-950: #171f16;
+
+  --color-earth-100: #efe4d6;
+  --color-earth-300: #cdb497;
+  --color-earth-500: #8f6c4e;
+  --color-earth-700: #644733;
+  --color-earth-900: #3a2a1e;
+
+  --color-accent-100: #f7e3d6;
+  --color-accent-300: #e3a37f;
+  --color-accent-500: #c8693a;
+  --color-accent-600: #a9522a;
+  --color-accent-700: #8c4322;
+
+  --color-ink: #1d2219;
+  --color-muted: #545a4e;
+
+  /* Business-line hues */
+  --color-trading: #8a6d22;
+  --color-trading-soft: #f3ebd3;
+  --color-ai: #376660;
+  --color-ai-soft: #dcebe7;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-cream-50 text-ink antialiased;
+    font-feature-settings: "ss01";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold tracking-tight text-moss-950;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-600;
+  }
+  ::selection {
+    @apply bg-accent-100 text-moss-950;
+  }
+}
+
+/* Scroll reveal — only hides content when JS is available (the "js" class is set in <head>). */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Subtle topographic line texture used on dark sections */
+.topo-bg {
+  background-image: url("/images/topo-pattern.svg");
+  background-size: 640px;
+  background-repeat: repeat;
+}
