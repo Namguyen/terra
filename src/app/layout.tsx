@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
+import { Big_Shoulders, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { copy } from "@content/copy";
 import { site } from "@content/site";
@@ -8,13 +8,10 @@ import { Footer } from "@/components/layout/Footer";
 import { toJsonLd } from "@/lib/json-ld";
 import "./globals.css";
 
-// Be Vietnam Pro: modern geometric sans-serif with strong bold weights for headings
-const font = Be_Vietnam_Pro({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-body",
-});
+// Type system (design.md): condensed display, engineering body, mono only for map annotations
+const display = Big_Shoulders({ subsets: ["latin"], axes: ["opsz"], display: "swap", variable: "--ff-display" });
+const body = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500"], display: "swap", variable: "--ff-body" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--ff-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -26,9 +23,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#222e20",
+  // sRGB approximation of --color-paper (meta tags can't read CSS variables)
+  themeColor: "#1b1612",
   width: "device-width",
   initialScale: 1,
+};
+
+// One-line descriptor per page for the header's index sheet
+const indexDescriptions = {
+  home: copy.footer.tagline,
+  trading: copy.businessLines.trading.short,
+  ai: copy.businessLines.ai.short,
+  about: copy.about.hero.subtitle,
+  contact: copy.contact.meta.description,
 };
 
 const organizationJsonLd = {
@@ -42,21 +49,18 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    // suppressHydrationWarning: the inline script below adds the "js" class before React hydrates
-    <html lang="en" className={font.variable} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <head>
-        {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without JS */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(organizationJsonLd) }} />
       </head>
-      <body className="flex min-h-dvh flex-col font-sans">
+      <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
-          className="sr-only z-[100] rounded-full bg-moss-900 px-4 py-2 text-sm font-semibold text-cream-50 focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only bg-accent px-md py-xs font-medium text-accent-ink focus:not-sr-only focus:fixed focus:top-sm focus:left-sm focus:z-[var(--z-modal)]"
         >
           {copy.nav.skipToContent}
         </a>
-        <Header nav={copy.nav} />
+        <Header nav={copy.nav} descriptions={indexDescriptions} />
         <main id="main" className="flex-1">
           {children}
         </main>

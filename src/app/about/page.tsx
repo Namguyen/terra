@@ -4,77 +4,58 @@ import { buildMetadata } from "@/lib/seo";
 import { href } from "@/lib/routes";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { PageHero } from "@/components/sections/PageHero";
-import { FeatureGrid } from "@/components/sections/FeatureGrid";
-import { CtaBanner } from "@/components/sections/CtaBanner";
+import { PageIntro } from "@/components/sections/PageIntro";
+import { Ledger } from "@/components/sections/Ledger";
+import { Closing } from "@/components/sections/Closing";
 
 const t = copy.about;
 
 export const metadata: Metadata = buildMetadata({ route: "about", title: t.meta.title, description: t.meta.description });
 
+/* Hallmark · macrostructure: Long Document · design-system: design.md · designed-as-app */
 export default function AboutPage() {
-
   return (
     <>
-      <PageHero
-        eyebrow={t.hero.eyebrow}
-        title={t.hero.title}
-        subtitle={t.hero.subtitle}
-        image={{ src: "/images/placeholders/about.svg", alt: t.hero.imageAlt }}
-      />
+      <PageIntro title={t.hero.title} subtitle={t.hero.subtitle} />
 
-      <section className="py-16 sm:py-24">
-        <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <SectionHeading eyebrow={t.story.eyebrow} title={t.story.title} />
-          </div>
-          <div className="space-y-5 text-lg leading-relaxed text-muted lg:col-span-7">
+      <section className="py-3xl">
+        <Container className="grid gap-lg lg:grid-cols-12">
+          <h2 className="text-2xl lg:col-span-4">{t.story.title}</h2>
+          <div className="grid max-w-[65ch] gap-md lg:col-span-7 lg:col-start-6">
             {t.story.paragraphs.map((p, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <p>{p}</p>
-              </Reveal>
+              <p key={i} className={i === 0 ? "text-md text-ink" : "text-ink-2"}>
+                {p}
+              </p>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="pb-16 sm:pb-24">
-        <Container className="grid gap-5 md:grid-cols-2">
+      <section className="border-y border-rule-2 bg-paper-2">
+        <Container className="grid lg:grid-cols-2">
           {[t.mission, t.vision].map((block, i) => (
-            <Reveal
+            <div
               key={block.title}
-              delay={i * 90}
-              className={`rounded-3xl p-8 sm:p-10 ${i === 0 ? "topo-bg bg-moss-900 text-cream-50" : "bg-earth-100"}`}
+              className={`py-2xl ${i ? "border-t border-rule-2 lg:border-t-0 lg:border-l lg:ps-xl" : "lg:pe-xl"}`}
             >
-              <h2 className={`text-2xl ${i === 0 ? "text-cream-50" : ""}`}>{block.title}</h2>
-              <p className={`mt-4 text-lg leading-relaxed ${i === 0 ? "text-cream-200" : "text-earth-900"}`}>
-                {block.body}
-              </p>
-            </Reveal>
+              <h2 className="text-lg text-muted">{block.title}</h2>
+              <p className="mt-md max-w-[30ch] text-xl leading-snug text-ink">{block.body}</p>
+            </div>
           ))}
         </Container>
       </section>
 
-      <section className="bg-cream-100 py-16 sm:py-24">
+      <section className="py-3xl">
         <Container>
-          <SectionHeading eyebrow={t.values.eyebrow} title={t.values.title} />
-          <div className="mt-12">
-            <FeatureGrid items={t.values.items} icons={["shield", "eye", "users", "trending"]} columns={4} />
-          </div>
+          <h2 className="text-2xl">{t.values.title}</h2>
+          <Ledger items={t.values.items} className="mt-xl" />
         </Container>
       </section>
 
-
-      <CtaBanner
+      <Closing
         title={copy.home.finalCta.title}
         body={copy.home.finalCta.body}
-        actions={
-          <ButtonLink href={href("contact")} withArrow>
-            {copy.common.contactUs}
-          </ButtonLink>
-        }
+        actions={<ButtonLink href={href("contact")}>{copy.common.contactUs}</ButtonLink>}
       />
     </>
   );

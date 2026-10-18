@@ -5,17 +5,17 @@ import { toJsonLd } from "@/lib/json-ld";
 import { href } from "@/lib/routes";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { PageHero } from "@/components/sections/PageHero";
-import { FeatureGrid } from "@/components/sections/FeatureGrid";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { PageIntro } from "@/components/sections/PageIntro";
+import { StepSequence } from "@/components/sections/StepSequence";
+import { Ledger } from "@/components/sections/Ledger";
 import { Faq } from "@/components/sections/Faq";
-import { CtaBanner } from "@/components/sections/CtaBanner";
+import { Closing } from "@/components/sections/Closing";
 
 const t = copy.ai;
 
 export const metadata: Metadata = buildMetadata({ route: "ai", title: t.meta.title, description: t.meta.description });
 
+/* Hallmark · macrostructure: Narrative Workflow · design-system: design.md · designed-as-app */
 export default function AiPage() {
   const bookHref = href("contact", { interest: "ai" });
 
@@ -31,67 +31,35 @@ export default function AiPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow={t.hero.eyebrow}
-        title={t.hero.title}
-        subtitle={t.hero.subtitle}
-        accent="text-ai"
-        image={{ src: "/images/placeholders/ai.svg", alt: t.hero.imageAlt }}
-        actions={
-          <ButtonLink href={bookHref} withArrow>
-            {t.hero.cta}
-          </ButtonLink>
-        }
-      />
+      <PageIntro title={t.hero.title} subtitle={t.hero.subtitle} actions={<ButtonLink href={bookHref}>{t.hero.cta}</ButtonLink>} />
 
-      <section className="py-16 sm:py-24">
+      <section className="py-3xl">
         <Container>
-          <SectionHeading eyebrow={t.services.eyebrow} title={t.services.title} />
-          <div className="mt-12">
-            <FeatureGrid
-              items={t.services.items}
-              icons={["search", "chat", "workflow", "chart"]}
-              columns={4}
-              iconTone="bg-ai-soft text-ai"
-            />
+          <h2 className="max-w-[20ch] text-2xl">{t.services.title}</h2>
+          <Ledger items={t.services.items} className="mt-xl" />
+        </Container>
+      </section>
+
+      <section className="border-y border-rule-2 bg-paper-2 py-2xl">
+        <Container>
+          <h2 className="max-w-[20ch] text-2xl">{t.process.title}</h2>
+          <div className="mt-xl">
+            <StepSequence steps={t.process.steps} />
           </div>
         </Container>
       </section>
 
-      <section className="bg-cream-100 py-16 sm:py-24">
-        <Container>
-          <SectionHeading eyebrow={t.process.eyebrow} title={t.process.title} />
-          <div className="mt-12">
-            <ProcessSteps steps={t.process.steps} tone="bg-ai text-white" />
-          </div>
-        </Container>
-      </section>
-
-
-      <section className="bg-cream-100 py-16 sm:py-24">
-        <Container className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading eyebrow={t.faq.eyebrow} title={t.faq.title} />
-          </div>
+      <section className="py-3xl">
+        <Container className="grid gap-xl lg:grid-cols-12">
+          <h2 className="text-2xl lg:col-span-4">{t.faq.title}</h2>
           <div className="lg:col-span-8">
             <Faq items={t.faq.items} />
           </div>
         </Container>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: toJsonLd(faqJsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(faqJsonLd) }} />
       </section>
 
-      <CtaBanner
-        title={t.cta.title}
-        body={t.cta.body}
-        actions={
-          <ButtonLink href={bookHref} withArrow>
-            {copy.common.bookAiConsult}
-          </ButtonLink>
-        }
-      />
+      <Closing title={t.cta.title} body={t.cta.body} actions={<ButtonLink href={bookHref}>{copy.common.bookAiConsult}</ButtonLink>} />
     </>
   );
 }

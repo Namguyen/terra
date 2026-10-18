@@ -19,6 +19,8 @@ export const copy = {
     closeMenu: "Close menu",
     skipToContent: "Skip to main content",
     mainNav: "Main navigation",
+    menu: "Menu",
+    close: "Close",
   },
 
   common: {
@@ -31,28 +33,27 @@ export const copy = {
 
   home: {
     hero: {
-      eyebrow: "Trading · Technology",
       title: "Solid foundations, from supply chain to technology.",
       subtitle:
         "Terrafound is a dependable partner for distributors, contractors, investors and growing businesses — sourcing what you need from reliable suppliers, and bringing practical AI into how you work.",
       primaryCta: "Request a quote",
       secondaryCta: "Book an AI consultation",
-      shortcutsLabel: "Explore our business lines",
-      imageAlt: "Illustration of a construction site at sunrise",
+    },
+    map: {
+      label: "Diagram: the Trading route and the AI route both run through the Terrafound desk in Dubai.",
+      hub: "Dubai desk",
+      coords: "25.16°N 55.30°E",
+      legend: { trading: "Trading route", ai: "AI route" },
     },
     intro: {
-      eyebrow: "Who we are",
       title: "One partner, two ways to build stronger.",
       body: "The name says it: “Terra” means earth, “found” means foundation. We help businesses build on solid ground — through dependable sourcing and trading, and through practical digital transformation — always with the same promise of reliability, transparency and long-term partnership.",
       cta: "Our story",
     },
     lines: {
-      eyebrow: "What we do",
       title: "Two business lines, one standard of quality",
-      subtitle: "Each team is specialised, yet works from the same principles of reliability and transparency.",
     },
     why: {
-      eyebrow: "Why Terrafound",
       title: "Reasons partners keep working with us",
       items: [
         {
@@ -86,13 +87,11 @@ export const copy = {
       name: "General Trading",
       short: "Import, export and on-demand sourcing across industries, managed end to end.",
       long: "We find, verify and deliver the products you need — from supplier search and negotiation to inspection, logistics and customs.",
-      imageAlt: "Illustration of cargo containers",
     },
     ai: {
       name: "AI Consultancy",
       short: "Practical AI for businesses: chatbots, process automation, data analytics and LLM integration.",
       long: "We help small and mid-sized businesses identify where AI creates real value, then design, build and support solutions that teams actually use.",
-      imageAlt: "Abstract illustration of a data network",
     },
   },
 
@@ -103,14 +102,11 @@ export const copy = {
         "Import, export and on-demand sourcing. Terrafound finds, verifies and delivers the products your business needs.",
     },
     hero: {
-      eyebrow: "General Trading",
       title: "Sourcing made simple, from request to delivery",
       subtitle:
         "Tell us what you need. We search, verify, negotiate and deliver — so you deal with one accountable partner instead of many.",
-      imageAlt: "Illustration of shipping containers at a port",
     },
     process: {
-      eyebrow: "How it works",
       title: "Our sourcing & supply process",
       steps: [
         { title: "Requirement brief", body: "We clarify specifications, quantities, budget, target price and delivery timeline." },
@@ -121,7 +117,6 @@ export const copy = {
       ],
     },
     categories: {
-      eyebrow: "Product categories",
       title: "Industries we source for",
       items: [
         { title: "Building & hardware", body: "Fixtures, fittings, tools, scaffolding and site equipment." },
@@ -133,7 +128,6 @@ export const copy = {
       ],
     },
     logistics: {
-      eyebrow: "Logistics capability",
       title: "Moving goods reliably across borders",
       body: "We work with freight forwarders, customs brokers and warehouse partners to keep shipments visible and on time.",
       items: [
@@ -142,10 +136,8 @@ export const copy = {
         { title: "Warehousing", body: "Short-term storage and consolidation through partner warehouses." },
         { title: "Shipment tracking", body: "Regular status updates from departure to final delivery." },
       ],
-      imageAlt: "Illustration of a logistics warehouse",
     },
     form: {
-      eyebrow: "Sourcing request",
       title: "Tell us what you need",
       subtitle: "The more detail you share, the faster we can return a qualified offer.",
     },
@@ -158,15 +150,12 @@ export const copy = {
         "AI strategy, chatbots and internal assistants, process automation and data analytics for small and mid-sized businesses. Book a consultation with Terrafound.",
     },
     hero: {
-      eyebrow: "AI Consultancy",
       title: "Practical AI that fits the way your business works",
       subtitle:
         "We start with your processes and data, not with hype. Then we design, build and support AI solutions your team will actually use.",
       cta: "Book an AI consultation",
-      imageAlt: "Abstract illustration of connected data points",
     },
     services: {
-      eyebrow: "Services",
       title: "What we help with",
       items: [
         {
@@ -188,7 +177,6 @@ export const copy = {
       ],
     },
     process: {
-      eyebrow: "How we work",
       title: "From first conversation to working solution",
       steps: [
         { title: "Discovery", body: "A free initial session to understand your goals, processes and constraints." },
@@ -199,7 +187,6 @@ export const copy = {
       ],
     },
     faq: {
-      eyebrow: "FAQ",
       title: "Frequently asked questions",
       items: [
         {
@@ -236,13 +223,10 @@ export const copy = {
       description: "The story, values and team behind Terrafound — building solid foundations from supply chain to technology.",
     },
     hero: {
-      eyebrow: "About Terrafound",
       title: "Built on solid ground",
       subtitle: "A company founded on a simple idea: everything worthwhile is built on a reliable foundation.",
-      imageAlt: "Illustration of a building foundation under construction",
     },
     story: {
-      eyebrow: "Our story",
       title: "From the ground up",
       paragraphs: [
         "Terrafound began in trading, working with businesses that needed a sourcing partner they could count on.",
@@ -259,7 +243,6 @@ export const copy = {
       body: "To become a trusted regional partner where reliable supply and digital capability come together.",
     },
     values: {
-      eyebrow: "Core values",
       title: "What we stand on",
       items: [
         { title: "Reliability", body: "We commit to what we can deliver, and deliver what we commit to." },
@@ -276,7 +259,6 @@ export const copy = {
       description: "Contact Terrafound for sourcing and trading quotes or an AI consultation.",
     },
     hero: {
-      eyebrow: "Contact",
       title: "Let’s talk about your project",
       subtitle: "Send us a message and the right team will reply shortly.",
     },
@@ -303,7 +285,7 @@ export const copy = {
       timeline: "Required timeline",
     },
     placeholders: {
-      name: "Jane Doe",
+      name: "Omar Haddad",
       company: "Company name",
       email: "you@company.com",
       phone: "+00 000 000 000",

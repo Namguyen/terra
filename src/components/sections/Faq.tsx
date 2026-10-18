@@ -1,19 +1,19 @@
-import { Icon } from "@/components/ui/Icon";
-
-/** Accessible FAQ using native <details>/<summary> (keyboard friendly, works without JS). */
+/** Conversational FAQ on native <details>/<summary> (keyboard friendly, works without JS). */
 export function Faq({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="divide-y divide-moss-900/10 rounded-2xl border border-moss-900/10 bg-white/70">
+    <div className="border-b border-rule">
       {items.map((item) => (
-        <details key={item.q} className="group px-5 sm:px-6">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-semibold text-moss-950 [&::-webkit-details-marker]:hidden">
-            <h3 className="text-base">{item.q}</h3>
-            <Icon
-              name="chevronDown"
-              className="size-5 shrink-0 text-accent-600 transition-transform duration-200 group-open:rotate-180"
-            />
+        <details key={item.q} className="group border-t border-rule">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-lg py-lg [&::-webkit-details-marker]:hidden">
+            <h3 className="font-body text-md font-medium tracking-normal normal-case">{item.q}</h3>
+            <span
+              aria-hidden="true"
+              className="font-display text-xl leading-none text-accent transition-transform duration-[var(--dur-short)] ease-out group-open:rotate-45"
+            >
+              +
+            </span>
           </summary>
-          <p className="pb-5 text-sm leading-relaxed text-muted">{item.a}</p>
+          <p className="max-w-[62ch] pb-lg text-ink-2">{item.a}</p>
         </details>
       ))}
     </div>

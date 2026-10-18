@@ -13,6 +13,7 @@ import {
   type ValidationError,
   type ValidationErrors,
 } from "@/lib/validation";
+import { buttonClasses } from "@/components/ui/ButtonLink";
 import { Icon } from "@/components/ui/Icon";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -64,7 +65,7 @@ function errorMessage(t: Copy["form"], error: ValidationError) {
 }
 
 const inputBase =
-  "block w-full rounded-xl border bg-white px-4 py-3 text-sm text-ink placeholder:text-moss-700/60 transition-colors focus:border-moss-700 focus:outline-none focus:ring-2 focus:ring-moss-700/20";
+  "block w-full rounded-xs border bg-paper-2 px-md py-sm text-base text-ink placeholder:text-muted transition-[border-color] duration-[var(--dur-micro)] ease-out hover:border-ink-2 focus:border-ink-2";
 
 /** Lead form used for general contact / quote / AI booking ("contact") and sourcing requests ("sourcing"). */
 export function LeadForm({ kind, t, initial }: LeadFormProps) {
@@ -119,9 +120,9 @@ export function LeadForm({ kind, t, initial }: LeadFormProps) {
     name in t.placeholders ? t.placeholders[name as keyof typeof t.placeholders] : undefined;
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-x-lg gap-y-xs sm:grid-cols-2">
       {/* Honeypot: hidden from people and assistive tech, bots fill it in */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+      <div aria-hidden="true" className="sr-only">
         <label htmlFor={`${idPrefix}-website`}>Website</label>
         <input
           id={`${idPrefix}-website`}
@@ -146,19 +147,19 @@ export function LeadForm({ kind, t, initial }: LeadFormProps) {
           "aria-invalid": error ? true : undefined,
           "aria-describedby": describedBy,
           onBlur: () => onBlur(field.name),
-          className: `${inputBase} ${error ? "border-red-700" : "border-moss-900/15"}`,
+          className: `${inputBase} ${error ? "border-danger" : "border-rule"}`,
         };
 
         return (
           <div key={field.name} className={field.wide ? "sm:col-span-2" : ""}>
-            <label htmlFor={id} className="mb-1.5 flex items-baseline gap-1.5 text-sm font-medium text-moss-950">
+            <label htmlFor={id} className="mb-xs flex items-baseline gap-xs text-xs font-medium tracking-[0.06em] text-ink-2 uppercase">
               {label(field.name)}
               {required ? (
-                <span className="text-accent-700" aria-hidden="true">
+                <span className="text-accent" aria-hidden="true">
                   *
                 </span>
               ) : (
-                <span className="text-xs font-normal text-muted">({t.optional})</span>
+                <span className="font-normal tracking-normal text-muted normal-case">({t.optional})</span>
               )}
               {required ? <span className="sr-only">({t.required})</span> : null}
             </label>
@@ -189,34 +190,34 @@ export function LeadForm({ kind, t, initial }: LeadFormProps) {
               />
             )}
 
-            {error ? (
-              <p id={`${id}-error`} className="mt-1.5 text-xs font-medium text-red-700">
-                {errorMessage(t, error)}
-              </p>
-            ) : null}
+            {/* The slot keeps its line even when empty, so an appearing error never shifts the form */}
+            <p id={`${id}-error`} className="mt-xs min-h-[1lh] text-xs font-medium text-danger">
+              {error ? errorMessage(t, error) : null}
+            </p>
           </div>
         );
       })}
 
       <div className="sm:col-span-2">
-        <p className="text-xs leading-relaxed text-muted">{t.privacy}</p>
+        <p className="text-xs text-muted">{t.privacy}</p>
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-600 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-700 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+          aria-busy={status === "submitting"}
+          className={buttonClasses("primary", "mt-lg w-full sm:w-auto")}
         >
           {status === "submitting" ? t.submitting : kind === "sourcing" ? t.submitSourcing : t.submit}
           {status !== "submitting" ? <Icon name="arrowRight" className="size-4" /> : null}
         </button>
 
-        <div aria-live="polite" role="status" className="mt-4 empty:hidden">
+        <div aria-live="polite" role="status" className="mt-md empty:hidden">
           {status === "success" ? (
-            <p className="flex items-start gap-2 rounded-xl bg-moss-50 p-4 text-sm text-moss-900">
-              <Icon name="check" className="size-5 shrink-0 text-moss-700" />
+            <p className="flex items-start gap-xs border-t border-success pt-sm text-success">
+              <Icon name="check" className="size-5 shrink-0" />
               {t.success}
             </p>
           ) : null}
-          {status === "error" ? <p className="rounded-xl bg-red-50 p-4 text-sm text-red-800">{t.error}</p> : null}
+          {status === "error" ? <p className="border-t border-danger pt-sm text-danger">{t.error}</p> : null}
         </div>
       </div>
     </form>

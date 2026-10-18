@@ -1,123 +1,98 @@
-@import "tailwindcss";
-
-/*
- * Terrafound design tokens — inspired by "terra" (earth):
- * deep moss green, earth brown, cream background and a terracotta accent.
- * Each business line has a soft secondary hue: ochre (trading), sage (AI).
+/* Hallmark · genre: editorial · macrostructure: Map / Diagram (home) · design-system: design.md · designed-as-app
+ * theme: custom · vibe: "desert trade routes, terracotta, precise, after dark" · paper: oklch(16% 0.012 55) · accent: oklch(68% 0.15 42)
+ * display: Big Shoulders 800 · body: IBM Plex Sans · outlier: IBM Plex Mono · axes: dark / display-condensed-bold / chromatic-terracotta
+ * nav: N9 edge-aligned · footer: Ft1 mast-headed · enrichment: Tier B hand-built SVG route map · studied: no · context: user-confirmed · v1.1.0
+ * Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V5
  */
-@theme {
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-
-  --color-cream-50: #fcfaf5;
-  --color-cream-100: #f6f1e7;
-  --color-cream-200: #ece3d1;
-  --color-cream-300: #ddd0b8;
-
-  --color-moss-50: #eef1ea;
-  --color-moss-100: #dfe5d8;
-  --color-moss-300: #a9b79e;
-  --color-moss-500: #5d7556;
-  --color-moss-700: #3a4d36;
-  --color-moss-800: #2c3b29;
-  --color-moss-900: #222e20;
-  --color-moss-950: #171f16;
-
-  --color-earth-100: #efe4d6;
-  --color-earth-300: #cdb497;
-  --color-earth-500: #8f6c4e;
-  --color-earth-700: #644733;
-  --color-earth-900: #3a2a1e;
-
-  --color-accent-100: #f7e3d6;
-  --color-accent-300: #e3a37f;
-  --color-accent-500: #c8693a;
-  --color-accent-600: #a9522a;
-  --color-accent-700: #8c4322;
-
-  --color-ink: #1d2219;
-  --color-muted: #545a4e;
-
-  /* Business-line hues */
-  --color-trading: #8a6d22;
-  --color-trading-soft: #f3ebd3;
-  --color-ai: #376660;
-  --color-ai-soft: #dcebe7;
-
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+@import "tailwindcss";
+@import "../../tokens.css";
 
 @layer base {
   html {
+    overflow-x: clip;
+    color-scheme: dark;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-cream-50 text-ink antialiased;
-    font-feature-settings: "ss01";
+    overflow-x: clip;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    font-variant-numeric: oldstyle-nums;
+    -webkit-font-smoothing: antialiased;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply font-bold tracking-tight text-moss-950;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.04;
+    color: var(--color-ink);
     text-wrap: balance;
+    overflow-wrap: anywhere;
+    min-width: 0;
   }
   p {
     text-wrap: pretty;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent-600;
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
   }
   ::selection {
-    @apply bg-accent-100 text-moss-950;
+    background-color: var(--color-accent);
+    color: var(--color-accent-ink);
   }
 }
 
-/* Scroll reveal — only hides content when JS is available (the "js" class is set in <head>). */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: var(--reveal-delay, 0ms);
+.tnum {
+  font-variant-numeric: tabular-nums;
 }
-.js .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+
+/* The one orchestrated entrance: the route map draws, then its stations ink on. */
+.route-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: route-draw 1400ms var(--ease-out) 150ms forwards;
+}
+.route-station {
+  opacity: 0;
+  animation: station-in var(--dur-long) var(--ease-out) forwards;
+  animation-delay: calc(700ms + var(--i, 0) * 90ms);
+}
+@keyframes route-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes station-in {
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .js .reveal {
+  .route-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .route-station {
+    animation: none;
     opacity: 1;
-    transform: none;
-    transition: none;
   }
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0ms !important;
   }
-}
-
-/* Subtle topographic line texture used on dark sections */
-.topo-bg {
-  background-image: url("/images/topo-pattern.svg");
-  background-size: 640px;
-  background-repeat: repeat;
 }

@@ -1,0 +1,89 @@
+/* Hallmark · tokens · Terrafound · theme: custom · vibe: "desert trade routes, terracotta, precise, after dark"
+ * axes: dark / display-condensed-bold / chromatic-terracotta · source of truth: design.md
+ *
+ * Tailwind v4 reads the @theme block, so every token below is both a CSS custom
+ * property and a utility (bg-paper, text-ink, font-display, text-display-s, p-xl, ease-out…).
+ * Default Tailwind colours and fonts are reset: nothing outside this file can leak in.
+ */
+@theme {
+  /* Colour — OKLCH, anchor hue 55 (desert sand), one terracotta accent */
+  --color-*: initial;
+  --color-paper: oklch(16% 0.012 55);
+  --color-paper-2: oklch(19.5% 0.014 55);
+  --color-paper-3: oklch(24% 0.015 55);
+  --color-rule-2: oklch(26% 0.012 55);
+  --color-rule: oklch(34% 0.014 55);
+  --color-muted: oklch(70% 0.014 65);
+  --color-ink-2: oklch(82% 0.014 70);
+  --color-ink: oklch(94% 0.012 75);
+  --color-accent: oklch(68% 0.15 42);
+  --color-accent-strong: oklch(74% 0.15 45);
+  --color-accent-ink: oklch(16% 0.012 55);
+  --color-focus: oklch(78% 0.17 48);
+  --color-danger: oklch(72% 0.15 25);
+  --color-success: oklch(80% 0.11 145);
+
+  /* Type — display + body + one outlier (mono: map coordinates and annotations only) */
+  --font-*: initial;
+  --font-display: var(--ff-display), "Arial Narrow", sans-serif;
+  --font-body: var(--ff-body), ui-sans-serif, sans-serif;
+  --font-mono: var(--ff-mono), ui-monospace, monospace;
+
+  /* Scale — major third (1.25) from a 16px body; display sizes clamp */
+  --text-*: initial;
+  --text-xs: 0.8rem;
+  --text-xs--line-height: 1.45;
+  --text-base: 1rem;
+  --text-base--line-height: 1.6;
+  --text-md: 1.25rem;
+  --text-md--line-height: 1.5;
+  --text-lg: 1.5625rem;
+  --text-lg--line-height: 1.15;
+  --text-xl: 1.9531rem;
+  --text-xl--line-height: 1.1;
+  --text-2xl: 2.4414rem;
+  --text-2xl--line-height: 1.06;
+  --text-3xl: 3.0518rem;
+  --text-3xl--line-height: 1.04;
+  --text-display-s: clamp(2.5rem, 4.4vw + 1rem, 4.75rem);
+  --text-display-s--line-height: 1.03;
+  --text-display: clamp(3rem, 6vw + 1rem, 6rem);
+  --text-display--line-height: 1.02;
+  --text-mast: clamp(3.5rem, 9vw + 1rem, 7rem);
+  --text-mast--line-height: 1;
+
+  /* Space — 4pt scale, named by role */
+  --spacing-3xs: 0.125rem;
+  --spacing-2xs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+  --spacing-4xl: 9rem;
+
+  /* Shape */
+  --radius-*: initial;
+  --radius-xs: 2px;
+  --container-page: 82rem;
+
+  /* Motion */
+  --ease-*: initial;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  --rule-hair: 1px;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-modal: 400;
+}

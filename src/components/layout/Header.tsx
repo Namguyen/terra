@@ -4,33 +4,30 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Copy } from "@content/copy";
-import { href, type RouteKey } from "@/lib/routes";
+import { href, routes, type RouteKey } from "@/lib/routes";
 import { Container } from "@/components/ui/Container";
-import { Icon } from "@/components/ui/Icon";
 import { buttonClasses } from "@/components/ui/ButtonLink";
-import { Logo } from "./Logo";
+import { Wordmark } from "./Wordmark";
 
-const navItems: RouteKey[] = ["trading", "ai", "about", "contact"];
+const routeKeys = Object.keys(routes) as RouteKey[];
 
-export function Header({ nav }: { nav: Copy["nav"] }) {
+/**
+ * N9 edge-aligned header: wordmark hard-left, quote button + index toggle hard-right.
+ * The page list lives in a full-height index sheet instead of an inline link row.
+ */
+export function Header({ nav, descriptions }: { nav: Copy["nav"]; descriptions: Record<RouteKey, string> }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close the mobile menu on navigation
+  // Close the index on navigation
   useEffect(() => setOpen(false), [pathname]);
 
-  // Escape closes the menu and returns focus to the toggle; lock body scroll while open
+  // While open: move focus in, Escape closes and returns focus to the toggle, lock body scroll
   useEffect(() => {
     if (!open) return;
+    firstLinkRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
@@ -46,88 +43,52 @@ export function Header({ nav }: { nav: Copy["nav"] }) {
   }, [open]);
 
   const isActive = (key: RouteKey) => (key === "home" ? pathname === "/" : pathname?.startsWith(href(key)));
-  const labels: Record<RouteKey, string> = {
-    home: nav.home,
-    trading: nav.trading,
-    ai: nav.ai,
-    about: nav.about,
-    contact: nav.contact,
-  };
-  const quoteHref = href("contact", { interest: "trading" });
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-        scrolled || open
-          ? "border-moss-900/10 bg-cream-50/95 shadow-[0_1px_12px_-6px_rgba(23,31,22,0.25)] backdrop-blur"
-          : "border-transparent bg-cream-50/80 backdrop-blur-sm"
-      }`}
-    >
-      <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Logo />
+    <header className="sticky top-0 z-[var(--z-sticky)] border-b border-rule-2 bg-paper">
+      <Container className="flex h-[4.5rem] items-center justify-between gap-md">
+        <Wordmark />
 
-        <nav aria-label={nav.mainNav} className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {navItems.map((key) => (
-              <li key={key}>
-                <Link
-                  href={href(key)}
-                  aria-current={isActive(key) ? "page" : undefined}
-                  className={`rounded-full px-3 py-2 text-sm font-medium transition-colors xl:px-4 ${
-                    isActive(key) ? "bg-moss-900/8 text-moss-950" : "text-moss-800 hover:text-accent-700"
-                  }`}
-                >
-                  {labels[key]}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden sm:block">
-            <Link href={quoteHref} className={buttonClasses("primary", "px-4 py-2.5")}>
-              {nav.cta}
-            </Link>
-          </div>
+        <div className="flex items-center gap-sm">
+          <Link href={href("contact", { interest: "trading" })} className={buttonClasses("primary", "px-md py-xs max-sm:hidden")}>
+            {nav.cta}
+          </Link>
           <button
             ref={toggleRef}
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-moss-950 hover:bg-moss-900/5 lg:hidden"
+            className={buttonClasses("outline", "px-md py-xs")}
             aria-expanded={open}
-            aria-controls="mobile-menu"
+            aria-controls="site-index"
             aria-label={open ? nav.closeMenu : nav.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
-            <Icon name={open ? "close" : "menu"} />
+            {open ? nav.close : nav.menu}
           </button>
         </div>
       </Container>
 
-      {/* Mobile menu */}
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="h-[calc(100dvh-4rem)] overflow-y-auto border-t border-moss-900/10 bg-cream-50 lg:hidden"
-      >
-        <Container className="py-6">
+      <div id="site-index" hidden={!open} className="h-[calc(100dvh-4.5rem)] overflow-y-auto bg-paper-2">
+        <Container className="py-xl sm:py-2xl">
           <nav aria-label={nav.mainNav}>
-            <ul className="divide-y divide-moss-900/10">
-              {(["home", ...navItems] as RouteKey[]).map((key) => (
-                <li key={key}>
+            <ul>
+              {routeKeys.map((key, i) => (
+                <li key={key} className="border-b border-rule-2 first:border-t">
                   <Link
+                    ref={i === 0 ? firstLinkRef : undefined}
                     href={href(key)}
                     aria-current={isActive(key) ? "page" : undefined}
-                    className="flex items-center justify-between py-4 text-lg font-semibold text-moss-950"
+                    className="group grid gap-2xs py-lg md:grid-cols-12 md:items-baseline md:gap-lg"
                   >
-                    {labels[key]}
-                    <Icon name="arrowRight" className="size-5 text-accent-600" />
+                    <span className="font-display text-2xl font-extrabold tracking-[0.01em] text-ink uppercase group-hover:text-accent group-aria-[current=page]:text-accent md:col-span-6 md:text-3xl">
+                      {nav[key]}
+                    </span>
+                    <span className="max-w-[52ch] text-ink-2 md:col-span-6">{descriptions[key]}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-          <Link href={quoteHref} className={buttonClasses("primary", "mt-6 w-full")}>
+          <Link href={href("contact", { interest: "trading" })} className={buttonClasses("primary", "mt-xl w-full sm:hidden")}>
             {nav.cta}
           </Link>
         </Container>
